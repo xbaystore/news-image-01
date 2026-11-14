@@ -84,7 +84,8 @@ def main() -> None:
     out_dir = Path(os.environ.get("MAKEFUN_OUTPUT_DIR", "/output"))
     out_dir.mkdir(parents=True, exist_ok=True)
     # Write to a sibling temp file, then rename: a reader of entry.png
-    # only ever sees the whole picture, never a half-copied one.
+    # only ever sees the whole picture, never a half-copied one. The
+    # copy is byte-for-byte, so the output hash always matches news.jpg.
     target = out_dir / OUTPUT_NAME
     tmp = out_dir / (OUTPUT_NAME + ".tmp")
     tmp.write_bytes(read_asset(source))
